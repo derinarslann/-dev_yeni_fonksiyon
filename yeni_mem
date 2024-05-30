@@ -1,0 +1,38 @@
+import discord
+import os
+import random
+from discord.ext import commands
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'{bot.user} olarak giriş yaptık')
+
+
+@bot.command()
+async def mem(ctx):
+    with open('Images\mem2.png', 'rb') as f:
+        # Dönüştürülen Discord kütüphane dosyasını bu değişkende saklayalım!
+        picture = discord.File(f)
+   # Daha sonra bu dosyayı bir parametre olarak gönderebiliriz!
+    await ctx.send(file=picture)
+
+@bot.command()
+async def rastgele(ctx):
+    rastgele_mem = random.choices(os.listdir('Images'))
+    with open(f'kodland\Images/{rastgele_mem}', 'rb') as f:
+            picture = discord.File(f)
+    await ctx.send(file=picture)
+
+@bot.command()
+async def abc(ctx):
+    komik_mem = random.choices(os.listdir('ımages2'))
+    with open(f'kodland\ımages2{komik_mem}', 'rb') as f:
+            picture = discord.File(f)
+    await ctx.send(file=picture)
+
+
+bot.run("token")
